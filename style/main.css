@@ -1,3 +1,31 @@
 body{
-  
+  background-color: rgb(12, 137, 161);
+  font-size: 16px;
+  color: white;
+}
+
+.div-center {
+  text-align: center;
+}
+
+.formulario {
+  width: 40%;
+  margin: 0 auto 0;
+  text-align: left;
+}
+
+.input-form, .select-form {
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.input-form[type="text"] {
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+  width: 40%;
+}
+
+.input-form[type="text"]:focus {
+  width: 80%;
 }
