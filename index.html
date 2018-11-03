@@ -10,12 +10,12 @@
 </head>
 
 <body>
-  <div id="divPrincipal">
-    <div class="div-center">
-      <h1>Me indique um filme</h1>
-      <h3>Quer assistir um filme e não sabe qual?</h3>
-    </div>
-    <div id="div-formulario" class="div-center formulario">
+  <div class="div-center">
+    <h1>Me indique um filme</h1>
+    <h3>Quer assistir um filme e não sabe qual?</h3>
+  </div>
+  <div id="divPrincipal" class="div-center div-show transition">
+    <div id="div-formulario" class="container">
       <div class="campo">
         <label for="txtAno">Ano:</label>
         <br />
@@ -57,6 +57,18 @@
       </div>
       <button tabindex="5" type="button" name="buscar" onclick="buscar()">Buscar</button>
     </div>
+  </div>
+
+  <div id="divFilme" class="div-center div-hide">
+    <div class="container transition">
+      <a href="#" onclick="trocarContexto('principal')">Iniciar outra busca</a>
+      <br />
+      <a href="#" onclick="buscar()">Indicar outro filme com os mesmo filtros</a>
+    </div>
+  </div>
+
+  <div id="modal-loading" class="modal">
+    <!-- Place at bottom of page -->
   </div>
 </body>
 

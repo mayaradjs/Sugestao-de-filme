@@ -8,15 +8,28 @@ body{
   text-align: center;
 }
 
-.formulario {
+.container {
   width: 40%;
   margin: 0 auto 0;
   text-align: left;
 }
 
+.div-hide{
+  display: none;
+}
+
+.div-show{
+}
+
 .input-form, .select-form {
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.transition{
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
 }
 
 .input-form[type="text"] {
@@ -28,4 +41,24 @@ body{
 
 .input-form[type="text"]:focus {
   width: 80%;
+}
+
+
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 )
+                url('../images/loading.gif')
+                50% 50%
+                no-repeat;
 }
