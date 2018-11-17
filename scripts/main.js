@@ -50,25 +50,29 @@ function RetornarFilme(datasource, ano, ator, categoria, outrainfo) {
   }
   var todosFilmes = datasource.getElementsByClassName('movie');
   var filmesSelecionados = [];
+  ano = "Ano: " + ano;
   for (var i = 0; i < todosFilmes.length; i++) {
-    if (ano != "" && todosFilmes[i].children[2] != ano) {
+    if (ano != "Ano: " && todosFilmes[i].children[2].textContent != ano) {
       continue;
     }
     if (ator != "") {
-
-      var ret = array_diff(ator.split(","), ulToVetor(todosFilmes[i].children[5]));
+      var ret = array_diff(ator.split(","), ulToVector(todosFilmes[i].children[7]));
+      if (ret.length != 0)
+        continue;
     }
-
-
+    if (categoria != "") {
+      if (ulToVector(todosFilmes[i].children[5]).indexOf(categoria) == -1)
+        continue;
+    }
 
     filmesSelecionados.push(todosFilmes[i]);
   }
 
-
+  //TODO Selecionar randomicamente um filme do vetor e devolver na variavel filme
   return filme;
 }
 
-function ulToVetor($ul) {
+function ulToVector($ul) {
   var retorno = [];
 
   var $liArray = $ul.children;
@@ -89,7 +93,7 @@ function array_diff(a1, a2) {
 };
 
 function ExibirFilme(filme) {
-
+  //TODO buscar trailer
 }
 
 function BuscaTrailer(nomeFilme) {
