@@ -1,5 +1,6 @@
 const keyEnter = 13;
-const urlApi = "api/";
+const urlApi = "https://leandrojsa.github.io/";
+//const urlApi = "api/";
 
 $(document).ready(function() {
   $('#divPrincipal input,#divPrincipal select').keyup(function(event) {
@@ -14,7 +15,7 @@ function buscar() {
   var categoria = $('#categorias').val();
   var outrasinf = $('#txtOutrasInformacoes').val();
   $("#modal-loading").show();
-  trocarContexto("filme");
+
   $.ajax({
       url: urlApi + 'movies.html',
       type: 'GET',
@@ -24,7 +25,12 @@ function buscar() {
       console.log(result);
       var $html = new DOMParser().parseFromString(result, "text/html");
       var filme = RetornarFilme($html, ano, ator, categoria, outrasinf);
-      ExibirFilme(filme);
+      if (filme) {
+        trocarContexto("filme");
+        ExibirFilme(filme);
+      } else {
+        alert("Nenhum filme foi encontrado");
+      }
     })
     .fail(function(result) {
       trocarContexto("principal");
@@ -62,18 +68,23 @@ function RetornarFilme(datasource, ano, ator, categoria, outrainfo) {
       if (ulToVector(todosFilmes[i].children[5]).indexOf(categoria) == -1)
         continue;
     }
+    if (outrainfo != "" && todosFilmes[i].children[3].textContent.indexOf(outrainfo) == -1) {
+      continue;
+    }
 
     filmesSelecionados.push(todosFilmes[i]);
   }
-
-  var i = sorteia(0, filmesSelecionados.length);
-  filme.Titulo = filmesSelecionados[i].children[1].textContent;
-  filme.Sinopse = filmesSelecionados[i].children[3].textContent;
-  filme.Ano = filmesSelecionados[i].children[2].textContent;
-  filme.Atores = filmesSelecionados[i].children[7];
-  filme.Imagem = filmesSelecionados[i].children[0].attributes['src'].value;
-
-  return filme;
+  if (filmesSelecionados.length > 0) {
+    var i = sorteia(0, filmesSelecionados.length);
+    filme.Titulo = filmesSelecionados[i].children[1].textContent;
+    filme.Sinopse = filmesSelecionados[i].children[3].textContent;
+    filme.Ano = filmesSelecionados[i].children[2].textContent;
+    filme.Atores = filmesSelecionados[i].children[7];
+    filme.Imagem = filmesSelecionados[i].children[0].attributes['src'].value;
+    return filme;
+  } else {
+    return undefined;
+  }
 }
 
 function ulToVector($ul) {
@@ -97,9 +108,10 @@ function array_diff(a1, a2) {
 };
 
 function ExibirFilme(filme) {
-  if (filme.Imagem != "") {
+  if (filme.Imagem != "")
     $("#imgFilme").attr("src", urlApi + filme.Imagem);
-  }
+  else
+    $("#imgFilme").attr("src", 'images/indisponivel.png');
 
   document.getElementById("TituloAno").innerHTML = "<h3>" + filme.Titulo + " (" + filme.Ano + ")</h3>"
   document.getElementById("infoFilme").innerHTML = filme.Sinopse;
@@ -114,16 +126,18 @@ function BuscaTrailer(nomeFilme) {
     part: 'snippet',
     key: 'AIzaSyAa_ocGjUA_rW2de7r6GAA4sj4aAevUQ6I',
     q: nomeFilme + 'trailer',
-    maxResults: 1
+    maxResults: 1,
+    order: "relevance"
   };
 
   $.getJSON(url, params, insereLinkTrailer);
 }
 
 function insereLinkTrailer(response) {
-  var urlResult = "https://www.youtube.com/watch?v=";
+  var urlResult = "https://www.youtube.com/embed/";
+
   urlResult += response.items[0].id.videoId;
-  $("#urlTrailer").attr('href', urlResult);
+  $("#urlTrailer").attr('src', urlResult);
 }
 
 function sorteia(min, max) {
