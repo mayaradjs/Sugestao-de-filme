@@ -24,9 +24,7 @@ function buscar() {
       console.log(result);
       var $html = new DOMParser().parseFromString(result, "text/html");
       var filme = RetornarFilme($html, ano, ator, categoria, outrasinf);
-
       ExibirFilme(filme);
-      //TODO Selecionar o filme baseado nos filtros
     })
     .fail(function(result) {
       trocarContexto("principal");
@@ -68,7 +66,13 @@ function RetornarFilme(datasource, ano, ator, categoria, outrainfo) {
     filmesSelecionados.push(todosFilmes[i]);
   }
 
-  //TODO Selecionar randomicamente um filme do vetor e devolver na variavel filme
+  var i = sorteia(0, filmesSelecionados.length);
+  filme.Titulo = filmesSelecionados[i].children[1].textContent;
+  filme.Sinopse = filmesSelecionados[i].children[3].textContent;
+  filme.Ano = filmesSelecionados[i].children[2].textContent;
+  filme.Atores = filmesSelecionados[i].children[7];
+  filme.Imagem = filmesSelecionados[i].children[0].attributes['src'].value;
+
   return filme;
 }
 
@@ -93,6 +97,15 @@ function array_diff(a1, a2) {
 };
 
 function ExibirFilme(filme) {
+  if (filme.Imagem != "") {
+    $("#imgFilme").attr("src", urlApi + filme.Imagem);
+  }
+
+  document.getElementById("TituloAno").innerHTML = "<h3>" + filme.Titulo + " (" + filme.Ano + ")</h3>"
+  document.getElementById("infoFilme").innerHTML = filme.Sinopse;
+  document.getElementById("listaAtores").innerHTML = "<b>Atores: </b> <br/>" + filme.Atores.innerHTML;
+
+
   //TODO buscar trailer
 }
 
@@ -100,6 +113,10 @@ function BuscaTrailer(nomeFilme) {
   //TODO Youtube
 
   return urlTrailer;
+}
+
+function sorteia(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 function trocarContexto(contexto) {

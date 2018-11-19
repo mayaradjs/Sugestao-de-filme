@@ -62,3 +62,26 @@ body{
                 50% 50%
                 no-repeat;
 }
+
+img {
+  width: 200px;
+  margin: 0 auto 0;
+  text-align: center;
+}
+
+td{
+  text-align: center;
+}
+
+#TituloAno{
+  text-align: center;
+}
+
+#infoFilme{
+  text-align: justify;
+  text-indent: 2em;
+}
+
+#listaAtores{
+  text-align: left;
+}
