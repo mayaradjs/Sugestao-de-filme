@@ -105,14 +105,25 @@ function ExibirFilme(filme) {
   document.getElementById("infoFilme").innerHTML = filme.Sinopse;
   document.getElementById("listaAtores").innerHTML = "<b>Atores: </b> <br/>" + filme.Atores.innerHTML;
 
-
-  //TODO buscar trailer
+  BuscaTrailer(filme.Titulo);
 }
 
 function BuscaTrailer(nomeFilme) {
-  //TODO Youtube
+  var url = 'https://www.googleapis.com/youtube/v3/search';
+  var params = {
+    part: 'snippet',
+    key: 'AIzaSyAa_ocGjUA_rW2de7r6GAA4sj4aAevUQ6I',
+    q: nomeFilme + 'trailer',
+    maxResults: 1
+  };
 
-  return urlTrailer;
+  $.getJSON(url, params, insereLinkTrailer);
+}
+
+function insereLinkTrailer(response) {
+  var urlResult = "https://www.youtube.com/watch?v=";
+  urlResult += response.items[0].id.videoId;
+  $("#urlTrailer").attr('href', urlResult);
 }
 
 function sorteia(min, max) {
