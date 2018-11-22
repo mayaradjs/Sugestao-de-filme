@@ -1,0 +1,12 @@
+Equipe: Mayara Silva e Monira Silva
+
+~ Documentação do sistema Sugestão de filme ~
+
+Para melhor organizar o código, separamos os arquivos em pastas. Uma para cada tipo de arquivo.
+Na pasta "style", há o CSS do trabalho que possui formatações para algumas classes, tags e elementos do HTML.
+Em "images", temos as imagens usadas no trabalho.
+Em "script", encontra-se o JavaScript do nosso site o qual iremos explicar um pouco mais no decorrer do documento.
+A visualização inicial do site é um formulário onde o usuário pode inserir as informações do filme desejado.
+Uma requisição ajax é feita ao HTML disponibilizado e o resultado dessa requisição é transformado em uma variável do tipo DOM. A partir daí percorremos todos elementos da classe "movie" a fim de achar todos que atendam aos filtros passados.
+Segundo a especificação, o usuário pode não digitar todos os campos, portanto, consideramos que o usuário pode não preencher campo algum e ainda sim ter um resultado. Por isso, ao filtrar os filmes verificamos primeiro se um determinado filtro está vazio para depois comparar com o dado do html. Há uma ressalva para o filtro Ano, pois o html não retorna apenas o ano, mas a string "Ano: " antes do dado (Ex.: "Ano: 2010"), por isso concatenamos "Ano: " com o valor informado pelo usuário e só depois fazemos as comparações.
+
