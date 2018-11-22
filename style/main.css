@@ -2,11 +2,19 @@ body{
   background-color: rgb(15, 15, 15);
   font-size: 16px;
   color: white;
-  background-image: url("../images/background_cinema.jpg");
+  background-image: url("../images/background.png");
   background-repeat:no-repeat;
   background-size: cover;
 }
 
+#divRet{
+  position: absolute;
+  top: 10px;
+  left: 25%;
+  width: 700px;
+  height: 350px;
+  border: 3px solid #73AD21;
+}
 .div-center {
   text-align: center;
 }
