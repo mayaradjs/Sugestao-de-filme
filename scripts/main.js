@@ -29,6 +29,7 @@ function buscar() {
         trocarContexto("filme");
         ExibirFilme(filme);
       } else {
+        $("#modal-loading").hide();
         alert("Nenhum filme foi encontrado");
       }
     })
@@ -40,7 +41,6 @@ function buscar() {
       $("#modal-loading").hide();
       console.debug("Request Complete");
     });
-
 }
 
 function RetornarFilme(datasource, ano, ator, categoria, outrainfo) {

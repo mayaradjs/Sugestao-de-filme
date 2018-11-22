@@ -7,6 +7,7 @@
   <script src="scripts/jquery-3.3.1.min.js" charset="utf-8"></script>
   <script src="scripts/main.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 </head>
 
 <body>
@@ -56,16 +57,16 @@
           <br />
           <input class="input-form" tabindex="4" type="text" name="txtOutrasInformacoes" id="txtOutrasInformacoes">
         </div>
-        <button tabindex="5" type="button" name="buscar" onclick="buscar()">Buscar</button>
+        <button tabindex="5" type="button" name="buscar" onclick="buscar()" class="btn">Buscar</button>
       </div>
     </div>
-  </div>
-  <div id="divFilme" class="div-center div-hide">
-    <div class="container transition">
-      <a href="#" onclick="trocarContexto('principal')">Iniciar outra busca</a>
-      <br />
-      <a href="#" onclick="buscar()">Indicar outro filme com os mesmo filtros</a>
-      <div>
+
+    <div id="divFilme" class="div-center div-hide">
+      <div class="container transition">
+
+        <button name="novaBusca" class="btn bEsq" onclick="trocarContexto('principal')">Iniciar outra busca</button>
+        <button name="buscaNovamente" class="btn bDir" onclick="buscar()">Indicar outro filme com os mesmo filtros</button>
+
         <table id="tabelaFilmes">
           <tr id="TituloAno">
           </tr>
@@ -88,12 +89,10 @@
             </td>
           </tr>
         </table>
+
       </div>
     </div>
-
-
   </div>
-
   <div id="modal-loading" class="modal">
     <!-- Place at bottom of page -->
   </div>
